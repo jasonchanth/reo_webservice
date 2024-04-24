@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 
 @Configuration
 public class DataSourceConfiguration {
-    private static Log logger = LogFactory.getLog(DataSourceConfiguration.class);
+    private static final Log logger = LogFactory.getLog(DataSourceConfiguration.class);
     @Value("${spring.datasource.url}")
     private String databaseUrl;
 

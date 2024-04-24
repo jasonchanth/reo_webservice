@@ -1,6 +1,4 @@
 package org.example.jpa_demo.service;
-
-import org.example.jpa_demo.entity.Threads;
 import org.example.jpa_demo.entity.User;
 
 import java.util.List;

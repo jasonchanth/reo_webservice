@@ -45,11 +45,7 @@ public class UserServiceImpl implements UserService {
         // You can use any authentication mechanism (e.g., Spring Security, custom logic)
         // Here's a sample implementation using a mocked database:
         User user = userRepository.findByUsername(username);
-        if (user != null && user.getPassword().equals(password)) {
-            return true;
-        } else {
-            return false;
-        }
+        return user != null && user.getPassword().equals(password);
     }
 
     @Override

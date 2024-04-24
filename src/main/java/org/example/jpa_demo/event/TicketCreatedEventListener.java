@@ -15,7 +15,7 @@ import java.util.List;
 
 @Component
 public class TicketCreatedEventListener {
-    private static Log logger = LogFactory.getLog(TicketCreatedEventListener.class);
+    private static final Log logger = LogFactory.getLog(TicketCreatedEventListener.class);
     private final UserService userServiceService;
 
     private final FirebaseCloudMessagingService firebaseCloudMessagingService;

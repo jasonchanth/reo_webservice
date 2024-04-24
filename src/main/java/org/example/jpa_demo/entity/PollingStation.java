@@ -8,9 +8,9 @@ import lombok.Setter;
 @Setter
 public class PollingStation {
 
-  private String id;
-  private String owner;
-  private String address;
-  private String phone;
+    private String id;
+    private String owner;
+    private String address;
+    private String phone;
 
 }

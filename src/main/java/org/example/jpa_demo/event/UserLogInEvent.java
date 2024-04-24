@@ -2,7 +2,6 @@ package org.example.jpa_demo.event;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.example.jpa_demo.entity.Ticket;
 import org.example.jpa_demo.entity.User;
 import org.springframework.context.ApplicationEvent;
 

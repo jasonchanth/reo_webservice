@@ -1,7 +1,6 @@
 package org.example.jpa_demo.mapper;
 
 import org.example.jpa_demo.entity.Threads;
-import org.example.jpa_demo.entity.Ticket;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

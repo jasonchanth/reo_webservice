@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 
 @Repository
 public class JdbcUserRepository implements UserRepository {
-    private static Log logger = LogFactory.getLog(JdbcUserRepository.class);
+    private static final Log logger = LogFactory.getLog(JdbcUserRepository.class);
 
     private final JdbcTemplate jdbcTemplate;
 

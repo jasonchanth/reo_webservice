@@ -1,7 +1,6 @@
 package org.example.jpa_demo.service;
 
 import org.example.jpa_demo.entity.Threads;
-import org.example.jpa_demo.entity.Ticket;
 
 import java.util.List;
 

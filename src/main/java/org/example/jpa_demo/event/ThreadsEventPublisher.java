@@ -1,7 +1,6 @@
 package org.example.jpa_demo.event;
 
 import org.example.jpa_demo.entity.Threads;
-import org.example.jpa_demo.entity.Ticket;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 

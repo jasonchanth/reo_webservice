@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
 
 @Repository
 public class JdbcTicketRepository implements TicketRepository {
-    private static Log logger = LogFactory.getLog(JdbcTicketRepository.class);
+    private static final Log logger = LogFactory.getLog(JdbcTicketRepository.class);
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired

@@ -1,7 +1,6 @@
 package org.example.jpa_demo.service;
 
 import org.example.jpa_demo.entity.Threads;
-import org.example.jpa_demo.entity.Ticket;
 import org.example.jpa_demo.repository.ThreadsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

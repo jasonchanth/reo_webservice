@@ -1,7 +1,6 @@
 package org.example.jpa_demo.mapper;
 
 import org.example.jpa_demo.entity.Menu;
-import org.example.jpa_demo.entity.User;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
