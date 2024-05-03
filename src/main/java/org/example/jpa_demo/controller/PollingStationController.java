@@ -3,6 +3,7 @@ package org.example.jpa_demo.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.example.jpa_demo.entity.PollingStation;
+import org.example.jpa_demo.entity.PollingStationTask;
 import org.example.jpa_demo.service.PollingStationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,12 @@ public class PollingStationController {
         logger.info("get Polling Station list start");
         List<PollingStation> pollingStationsList = pollingStationService.getPollingStationsByUserId(userid);
         return new ResponseEntity<>(pollingStationsList, HttpStatus.OK);
+    }
+    @GetMapping("/task/{pollingStationId}")
+    public ResponseEntity<List<PollingStationTask>> getTaskByPollingStationId(@PathVariable String pollingStationId) {
+        logger.info("get Task start");
+        List<PollingStationTask> TaskList = pollingStationService.getTaskByPollingStationID(pollingStationId);
+        return new ResponseEntity<>(TaskList, HttpStatus.OK);
     }
 
 }

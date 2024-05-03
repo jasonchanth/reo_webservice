@@ -1,21 +1,15 @@
 package org.example.jpa_demo.repository;
 
-import com.mysql.jdbc.Statement;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.example.jpa_demo.entity.PollingStation;
-import org.example.jpa_demo.entity.Threads;
+import org.example.jpa_demo.entity.PollingStationTask;
 import org.example.jpa_demo.mapper.PollingStationRowMapper;
-import org.example.jpa_demo.mapper.ThreadsRowMapper;
+import org.example.jpa_demo.mapper.PollingStationTaskRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -29,9 +23,16 @@ public class JdbcPollingStationRepository implements PollingStationRepository {
     }
 
     @Override
-    public List<PollingStation> getPollingStationsByID(String id) {
+    public List<PollingStation> getPollingStationsByUserID(String userID) {
         String sql = "SELECT ps.* FROM pollingstation ps where id in (select pollingstationid from pollingstation_user where userid = ?)";
-        List<PollingStation> ps = jdbcTemplate.query(sql, new PollingStationRowMapper(), id);
+        List<PollingStation> ps = jdbcTemplate.query(sql, new PollingStationRowMapper(), userID);
+        logger.info(sql);
+        return ps;
+    }
+    @Override
+    public  List<PollingStationTask> getTaskByPollingStationID(String pollingstationid) {
+        String sql = "SELECT task.* FROM pollingstation_task task where pollingstationid = ?";
+        List<PollingStationTask> ps = jdbcTemplate.query(sql, new PollingStationTaskRowMapper(), pollingstationid);
         logger.info(sql);
         return ps;
     }

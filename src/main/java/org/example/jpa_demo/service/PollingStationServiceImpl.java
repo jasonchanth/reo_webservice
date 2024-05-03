@@ -1,6 +1,7 @@
 package org.example.jpa_demo.service;
 
 import org.example.jpa_demo.entity.PollingStation;
+import org.example.jpa_demo.entity.PollingStationTask;
 import org.example.jpa_demo.repository.PollingStationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,12 @@ public class PollingStationServiceImpl implements PollingStationService {
 
     @Override
     public List<PollingStation> getPollingStationsByUserId(String userID) {
-        return pollingStationRepository.getPollingStationsByID(userID);
+        return pollingStationRepository.getPollingStationsByUserID(userID);
+    }
+
+    @Override
+    public  List<PollingStationTask> getTaskByPollingStationID(String pollingStationID) {
+        return pollingStationRepository.getTaskByPollingStationID(pollingStationID);
     }
 
 }
