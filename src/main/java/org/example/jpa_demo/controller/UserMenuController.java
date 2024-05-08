@@ -26,6 +26,7 @@ public class UserMenuController {
 
     @GetMapping("/{role}")
     public ResponseEntity<?> getUserMenu(@PathVariable String role) {
+
         List<Menu> userMenu = userMenuService.getUserMenu(role);
         logger.info(userMenu);
         //  if (userMenu.isEmpty()) {

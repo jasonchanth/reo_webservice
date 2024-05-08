@@ -16,6 +16,7 @@ public class UserRowMapper implements RowMapper<User> {
         user.setUserTypeId(rs.getLong("user_type_id"));
         user.setLastLoginTime(rs.getTimestamp("last_login_time"));
         user.setFcmToken(rs.getString("FCM_TOKEN"));
+        user.setRole(rs.getString("role"));
 
         return user;
     }

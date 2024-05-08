@@ -9,6 +9,7 @@ public class User {
     private long userTypeId;
     private java.sql.Timestamp lastLoginTime;
     private String fcmToken;
+    private String role;
 
 
     public long getId() {
@@ -62,6 +63,14 @@ public class User {
 
     public void setFcmToken(String fcmToken) {
         this.fcmToken = fcmToken;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }
