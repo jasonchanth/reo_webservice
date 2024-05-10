@@ -2,6 +2,7 @@ package org.example.jpa_demo;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,9 @@ import java.util.Map;
 public class JwtUtil {
 
    // private String secret = "E4F5BsHKs2G3v8PdExMUCr9JaA5fB1Tz"; // 替换为你自己的密钥
-    private String secret = "6JWDhyCBTm1++NeN9DcVQCknMz27ZmzB7UqCwLNv5c8=";
+   @Value("${jwt.secret}")
+   private String secret;
+
     private long expiration = 604800L; // 令牌的有效时间，单位为秒
     private static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
