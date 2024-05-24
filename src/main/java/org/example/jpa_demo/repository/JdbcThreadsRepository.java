@@ -91,7 +91,7 @@ public class JdbcThreadsRepository implements ThreadsRepository {
         Timestamp timestamp = Timestamp.valueOf(fiveMinutesAgo);
 
         // String sql = "SELECT t.*, ts.status FROM ticket t LEFT JOIN ticket_status ts ON t.ticket_status_id = ts.id WHERE t.updated_at <= ?";
-        String sql = "SELECT t.* FROM threads t where ticket_id=?";
+        String sql = "SELECT t.*,(select attachment from thread_attachment ta where ta.thread_id = t.id ) as attachment FROM threads t where ticket_id=?";
         logger.info("timestamp: " + timestamp);
         List<Threads> threads = jdbcTemplate.query(sql, new ThreadsRowMapper(), ticketID);
         logger.info(sql);

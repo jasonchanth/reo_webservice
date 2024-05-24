@@ -16,4 +16,5 @@ public interface UserService {
 
     void updateUserFcmToken(User user);
 
+    void updateUserLastLoginTime(User user);
 }

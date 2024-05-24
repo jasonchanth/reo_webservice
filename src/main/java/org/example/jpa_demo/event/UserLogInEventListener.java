@@ -32,5 +32,6 @@ public class UserLogInEventListener {
         User user = event.getUser();
         logger.info("handleUserLogInEvent:" + user.getFcmToken());
         userService.updateUserFcmToken(user);
+        userService.updateUserLastLoginTime(user);
     }
 }

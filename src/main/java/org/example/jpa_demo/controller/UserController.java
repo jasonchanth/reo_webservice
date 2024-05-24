@@ -1,9 +1,5 @@
 package org.example.jpa_demo.controller;
 
-import cn.hutool.jwt.JWT;
-import cn.hutool.jwt.JWTPayload;
-import cn.hutool.jwt.JWTUtil;
-import cn.hutool.jwt.signers.JWTSignerUtil;
 import org.example.jpa_demo.JwtUtil;
 import org.example.jpa_demo.entity.User;
 import org.example.jpa_demo.event.UserEventPublisher;
@@ -104,7 +100,7 @@ public class UserController {
             userEventPublisher.publishUserLoginEvent(loginEvent.getUser());
 
             // Return a JSON response with success set to true
-            return ResponseEntity.ok().body("{\"success\": true,\"userID\":" + user.getId() + ",\"token\":\"" + token + "\"}");
+            return ResponseEntity.ok().body("{\"success\": true,\"userID\":" + user.getId() + ",\"userRole\":\"" + user.getRole() + "\",\"token\":\"" + token +  "\"}");
         } else {
             // Return a JSON response with success set to false
             return ResponseEntity.ok().body("{\"success\": false}");

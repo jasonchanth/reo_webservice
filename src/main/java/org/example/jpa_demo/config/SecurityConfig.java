@@ -80,15 +80,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests().antMatchers("/login").permitAll();
-
         //httpSecurity.authorizeRequests().antMatchers("/").permitAll();
+       httpSecurity.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/asset/**").permitAll();
+
+
 
         httpSecurity.authorizeRequests().anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);;
         httpSecurity.csrf().disable();
+        httpSecurity.headers().frameOptions().disable();
 
     }
 

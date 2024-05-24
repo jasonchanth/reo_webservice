@@ -39,11 +39,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean authenticateUser(String username, String password) {
-        // Implement your logic to authenticate the user
-        // Check the username and password against the user table in the database
-        // Return true if the credentials are correct, false otherwise
-        // You can use any authentication mechanism (e.g., Spring Security, custom logic)
-        // Here's a sample implementation using a mocked database:
         User user = userRepository.findByUsername(username);
         return user != null && user.getPassword().equals(password);
     }
@@ -51,5 +46,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUserFcmToken(User user) {
         userRepository.updateUserFcmToken(user);
+    }
+
+    @Override
+    public void updateUserLastLoginTime(User user) {
+        userRepository.updateUserLastLoginTime(user);
     }
 }

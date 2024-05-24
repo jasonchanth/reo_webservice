@@ -28,7 +28,7 @@ public class UserMenuController {
     public ResponseEntity<?> getUserMenu(@PathVariable String role) {
 
         List<Menu> userMenu = userMenuService.getUserMenu(role);
-        logger.info(userMenu);
+        logger.info(role);
         //  if (userMenu.isEmpty()) {
         //     return ResponseEntity.notFound().build();
         // } else {

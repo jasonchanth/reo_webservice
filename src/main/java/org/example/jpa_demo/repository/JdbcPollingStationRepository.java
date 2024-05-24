@@ -33,7 +33,7 @@ public class JdbcPollingStationRepository implements PollingStationRepository {
     public  List<PollingStationTask> getTaskByPollingStationID(String pollingstationid) {
         String sql = "SELECT task.* FROM pollingstation_task task where pollingstationid = ?";
         List<PollingStationTask> ps = jdbcTemplate.query(sql, new PollingStationTaskRowMapper(), pollingstationid);
-        logger.info(sql);
+        logger.info(ps);
         return ps;
     }
 }

@@ -15,7 +15,8 @@ public class ThreadsRowMapper implements RowMapper<Threads> {
         threads.setUserId(rs.getInt("user_id"));
         threads.setThreadType(rs.getString("thread_type"));
         threads.setMessage(rs.getString("message"));
-        threads.setCreatedAt(rs.getTimestamp("created_at"));
+        threads.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+        threads.setAttachment(rs.getString("attachment"));
 
 
         return threads;

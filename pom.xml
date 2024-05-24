@@ -96,12 +96,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-jwt -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-jwt</artifactId>
-            <version>5.8.27</version>
-        </dependency>
 
 
 

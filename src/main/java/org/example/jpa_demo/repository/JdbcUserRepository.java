@@ -78,5 +78,10 @@ public class JdbcUserRepository implements UserRepository {
         String sql = "UPDATE user SET  fcm_token = ? WHERE id = ?";
         jdbcTemplate.update(sql, user.getFcmToken(), user.getId());
     }
+    @Override
+    public void updateUserLastLoginTime(User user) {
+        String sql = "UPDATE user SET  last_login_time = SYSDATE() WHERE id = ?";
+        jdbcTemplate.update(sql,  user.getId());
+    }
 
 }

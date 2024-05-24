@@ -20,4 +20,6 @@ public interface UserRepository {
     User findByUsername(String name);
 
     void updateUserFcmToken(User user);
+
+    void updateUserLastLoginTime(User user);
 }
