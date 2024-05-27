@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.example.jpa_demo.entity.PollingStation;
 import org.example.jpa_demo.entity.PollingStationTask;
+import org.example.jpa_demo.entity.PollingStationSchedule;
 import org.example.jpa_demo.service.PollingStationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,12 @@ public class PollingStationController {
     public ResponseEntity<List<PollingStationTask>> getTaskByPollingStationId(@PathVariable String pollingStationId) {
         logger.info("get Task start");
         List<PollingStationTask> TaskList = pollingStationService.getTaskByPollingStationID(pollingStationId);
+        return new ResponseEntity<>(TaskList, HttpStatus.OK);
+    }
+    @GetMapping("/schedule/{pollingStationId}")
+    public ResponseEntity<List<PollingStationSchedule>> getScheduleByPollingStationId(@PathVariable String pollingStationId) {
+        logger.info("get Schedule start");
+        List<PollingStationSchedule> TaskList = pollingStationService.getScheduleByPollingStationID(pollingStationId);
         return new ResponseEntity<>(TaskList, HttpStatus.OK);
     }
 
