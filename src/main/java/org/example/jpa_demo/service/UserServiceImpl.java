@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getUserRoleById(int id) {
-        return userRepository.findRoleById(id);
+    public String getUserRoleByUserName(String username) {
+        return userRepository.findRoleByUserName(username);
     }
 
 

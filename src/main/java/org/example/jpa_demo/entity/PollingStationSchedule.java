@@ -3,6 +3,8 @@ package org.example.jpa_demo.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 public class PollingStationSchedule {
@@ -16,6 +18,7 @@ public class PollingStationSchedule {
   private int task5;
   private int task6;
   private int task7;
+  private LocalDateTime last_update;
 
 
 }

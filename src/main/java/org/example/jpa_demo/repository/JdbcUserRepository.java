@@ -43,9 +43,9 @@ public class JdbcUserRepository implements UserRepository {
     }
 
     @Override
-    public String findRoleById(int id) {
-        String sql = "SELECT user_type_id FROM user WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, String.class, id);
+    public String findRoleByUserName(String username) {
+        String sql = "SELECT role FROM user WHERE username = ?";
+        return jdbcTemplate.queryForObject(sql, String.class, username);
     }
 
 

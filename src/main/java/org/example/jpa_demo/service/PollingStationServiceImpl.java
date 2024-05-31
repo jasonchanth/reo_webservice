@@ -35,4 +35,6 @@ public class PollingStationServiceImpl implements PollingStationService {
         return pollingStationRepository.getScheduleByPollingStationID(pollingStationID);
     }
 
+
+
 }

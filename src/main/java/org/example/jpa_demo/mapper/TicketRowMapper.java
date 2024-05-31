@@ -15,7 +15,7 @@ public class TicketRowMapper implements RowMapper<Ticket> {
         ticket.setTicketStatusId(rs.getInt("ticket_status_id"));
         ticket.setCreatedby(rs.getInt("createdby"));
         ticket.setAssignedto(rs.getInt("assignedto"));
-        ticket.setUpdatedAt(rs.getTimestamp("updated_at"));
+        ticket.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
 
         // Set the status name from the joined table
         ticket.setStatus_name(rs.getString("status"));

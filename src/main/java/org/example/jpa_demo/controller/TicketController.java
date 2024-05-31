@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TicketController {
@@ -31,14 +32,20 @@ public class TicketController {
         this.ticketEventPublisher = ticketEventPublisher;
     }
 
-    @GetMapping("/ticketlist/{userId}")
-    public ResponseEntity<List<Ticket>> getTicketList(@PathVariable String userId) {
+    @GetMapping("/ticketlist/{userInfo}")
+    public ResponseEntity<List<Ticket>> getTicketList(@PathVariable String userInfo) {
         logger.info("getTicketList start");
         try {
-            if (userId == null || userId.isEmpty()) {
+            if (userInfo == null || userInfo.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-            List<Ticket> ticketList = ticketService.getTicketsByUserId(userId);
+            String[] userInfoArray = userInfo.split("_");
+            String userID = userInfoArray[0];
+            String userRole = userInfoArray[1];
+            logger.info("userID: " + userID);
+            logger.info("userRole: " + userRole);
+
+            List<Ticket> ticketList = ticketService.getTicketsByUserId(userID,userRole);
             return new ResponseEntity<>(ticketList, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Error while retrieving ticket list", e);
@@ -46,12 +53,26 @@ public class TicketController {
         }
     }
 
-
+//non use
     @GetMapping("/ticketthreads/{ticketId}")
     public ResponseEntity<List<Ticket>> getThreadsByTicketId(@PathVariable String ticketId) {
         logger.info("getTicketList start");
-        List<Ticket> ticketList = ticketService.getTicketsByUserId(ticketId);
+        List<Ticket> ticketList = ticketService.getTicketsByUserId(ticketId,ticketId);
         return new ResponseEntity<>(ticketList, HttpStatus.OK);
+    }
+    @PostMapping("/closeTicket")
+    public String closeTicket(
+            @RequestBody Map<String, Object> requestBody) {
+        logger.info("Close Ticket start");
+        int ticketID = Integer.parseInt(requestBody.get("ticketID").toString());
+        int userID = Integer.parseInt(requestBody.get("userID").toString());
+
+
+        Ticket ticket = ticketService.closeTicket(ticketID, userID);
+        //ticketEventPublisher.publishTicketCreatedEvent(ticket);
+        // Return a response indicating success or failure
+        logger.info(" Ticket status" + ticket.getStatus_name());
+        return "Ticket closed successfully";
     }
 
     @PostMapping("/addTicket")
@@ -59,6 +80,7 @@ public class TicketController {
             @RequestParam("ticketType") String ticketType,
             @RequestParam("subject") String subject,
             @RequestParam("ticketDetails") String ticketDetails,
+            @RequestParam("userID") String userID,
             @RequestParam(value = "mediaFiles", required = false) List<MultipartFile> mediaFiles) {
         logger.info("addTicket start");
         // Process the ticket data and media files
@@ -78,7 +100,7 @@ public class TicketController {
         // Save the ticket details and media files to a database or storage
         // ticketService.createTicket(ticketType,subject,ticketDetails);
 
-        Ticket ticket = ticketService.createTicket(ticketType, subject, ticketDetails);
+        Ticket ticket = ticketService.createTicket(ticketType, subject, ticketDetails, userID);
         ticketEventPublisher.publishTicketCreatedEvent(ticket);
         // Return a response indicating success or failure
         logger.info("new Ticket" + ticket);

@@ -28,7 +28,7 @@ public class JdbcPollingStationRepository implements PollingStationRepository {
     public List<PollingStation> getPollingStationsByUserID(String userID) {
         String sql = "SELECT ps.* FROM pollingstation ps where id in (select pollingstationid from pollingstation_user where userid = ?)";
         List<PollingStation> ps = jdbcTemplate.query(sql, new PollingStationRowMapper(), userID);
-        logger.info(sql);
+        logger.info("getPollingStationsByUserID" + sql + " UserID: "+userID);
         return ps;
     }
     @Override

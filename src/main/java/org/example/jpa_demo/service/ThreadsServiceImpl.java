@@ -18,8 +18,8 @@ public class ThreadsServiceImpl implements ThreadsService {
     }
 
     @Override
-    public Threads createThreads(int ticketid, int userid, String type, String message) {
-        return threadsRepository.createThreads(ticketid, userid, type, message);
+    public Threads createThreads(int ticketid, int userid, String type, String message, String filePath) {
+        return threadsRepository.createThreads(ticketid, userid, type, message, filePath);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package org.example.jpa_demo.repository;
 
 import com.mysql.jdbc.Statement;
-import org.example.jpa_demo.entity.Threads;
 import org.example.jpa_demo.entity.Ticket;
 import org.example.jpa_demo.mapper.TicketRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,21 +42,21 @@ public class JdbcTicketRepository implements TicketRepository {
     }
 
     @Override
-    public List<Ticket> getTicketsByUserId() {
+    public List<Ticket> getTicketsByCreatedByUserId(String userId) {
         logger.info("getTicketsByUserId start");
-        LocalDateTime fiveMinutesAgo = LocalDateTime.now().minusMinutes(5);
-        Timestamp timestamp = Timestamp.valueOf(fiveMinutesAgo);
-
-        String sql = "SELECT t.*, ts.status FROM ticket t LEFT JOIN ticket_status ts ON t.ticket_status_id = ts.id WHERE t.updated_at <= ?";
-        logger.info("timestamp: " + timestamp);
-        List<Ticket> tickets = jdbcTemplate.query(sql, new TicketRowMapper(), timestamp);
+        String sql = "SELECT t.*, ts.status FROM ticket t LEFT JOIN ticket_status ts ON t.ticket_status_id = ts.id WHERE t.createdby = ? ";
         logger.info(sql);
-
-        return tickets;
+        return jdbcTemplate.query(sql, new TicketRowMapper(), userId);
+    }
+    public List<Ticket> getTicketsByAssignedToUserId(String userId) {
+        logger.info("getTicketsByAssignedToUserId start");
+        String sql = "SELECT t.*, ts.status FROM ticket t LEFT JOIN ticket_status ts ON t.ticket_status_id = ts.id WHERE t.assignedto = ? ";
+        logger.info(sql);
+        return jdbcTemplate.query(sql, new TicketRowMapper(), userId);
     }
 
     @Override
-    public Ticket createTicket(String type, String subject, String details) {
+    public Ticket createTicket(String type, String subject, String details, int createdBy, int assignedTo) {
         logger.info("createTicket start");
 
         // Get the ticket type ID based on the provided type name
@@ -76,8 +75,8 @@ public class JdbcTicketRepository implements TicketRepository {
         newTicket.setSubject(subject);
         //newTicket.setDetails(details);
         newTicket.setTicketStatusId(1);
-        newTicket.setCreatedby(1);
-        newTicket.setAssignedto(1);
+        newTicket.setCreatedby(createdBy);
+        newTicket.setAssignedto(assignedTo);
         // Set other ticket properties as needed
 
         // Prepare the SQL query for inserting a new ticket
@@ -115,8 +114,19 @@ public class JdbcTicketRepository implements TicketRepository {
     }
 
     @Override
-    public Ticket findTicketByThreads(Threads threads) {
-        return null;
+    public Ticket findTicketByTicketId(String ticketId) {
+        logger.info("findTicketByTicketId start");
+        String sql = "SELECT t.*, ts.status FROM ticket t LEFT JOIN ticket_status ts ON t.ticket_status_id = ts.id WHERE t.id = ?";
+        logger.info(sql);
+        return jdbcTemplate.queryForObject(sql, new TicketRowMapper(), ticketId);
+    }
+
+
+    @Override
+    public Ticket closeTicket(int ticketID) {
+        String sql = "UPDATE ticket SET ticket_status_id = 2 WHERE id = ?";
+        jdbcTemplate.update(sql, ticketID);
+        return findTicketByTicketId(ticketID+"");
     }
 
 }

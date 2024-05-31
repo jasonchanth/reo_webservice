@@ -28,7 +28,7 @@ public class JdbcThreadsRepository implements ThreadsRepository {
 
 
     @Override
-    public Threads createThreads(int ticketid, int userid, String type, String message) {
+    public Threads createThreads(int ticketid, int userid, String type, String message, String filePath) {
         logger.info("create Threads start");
 
         // Get the ticket type ID based on the provided type name
@@ -79,6 +79,11 @@ public class JdbcThreadsRepository implements ThreadsRepository {
         if (keyHolder.getKey() != null) {
             int generatedId = keyHolder.getKey().intValue();
             newThreads.setId(generatedId);
+        }
+        if (filePath != null && !filePath.isEmpty()){
+            String sql2 = "INSERT INTO Thread_attachment (thread_id, attachment,display) VALUES (?, ?, ?)";
+            jdbcTemplate.update(sql2, newThreads.getId(), filePath,"1");
+            logger.info("create Thread_attachment sql:" + sql2+" thread_id: "+newThreads.getId()+" attachment: "+filePath);
         }
         logger.info("New Threads created. newThreads[" + newThreads + "]");
         return newThreads;

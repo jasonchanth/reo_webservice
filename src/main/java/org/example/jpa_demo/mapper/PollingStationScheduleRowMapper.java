@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class PollingStationScheduleRowMapper implements RowMapper<PollingStationSchedule> {
     @Override
@@ -19,6 +20,10 @@ public class PollingStationScheduleRowMapper implements RowMapper<PollingStation
         ps.setTask5(rs.getInt("task5"));
         ps.setTask6(rs.getInt("task6"));
         ps.setTask7(rs.getInt("task7"));
+        Timestamp lastUpdate = rs.getTimestamp("last_update");
+        if (lastUpdate != null) {
+            ps.setLast_update(lastUpdate.toLocalDateTime());
+        }
 
         return ps;
     }

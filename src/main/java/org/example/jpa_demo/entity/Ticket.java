@@ -3,6 +3,8 @@ package org.example.jpa_demo.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 public class Ticket {
@@ -12,7 +14,7 @@ public class Ticket {
     private int ticketStatusId;
     private int createdby;
     private int assignedto;
-    private java.sql.Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 
     private String status_name;
 

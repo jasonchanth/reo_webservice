@@ -8,7 +8,7 @@ public interface UserService {
 
     User getUserByName(String name);
 
-    String getUserRoleById(int id);
+    String getUserRoleByUserName(String username);
 
     List<String> getDeviceTokensForUser(String ticketID);
 
